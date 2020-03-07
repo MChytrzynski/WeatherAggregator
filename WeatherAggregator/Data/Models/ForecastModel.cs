@@ -5,7 +5,7 @@ namespace WeatherAggregator.Data.Models
     /// <summary>
     /// Contains data that describes weather at given time
     /// </summary>
-    class ForecastModel
+    public class ForecastModel
     {
         /// <summary>
         /// Requested location

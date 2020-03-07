@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WeatherAggregator.Data
 {
-    enum ForecastSourceType
+    public enum ForecastSourceType
     {
         OpenWeather,WeatherStack
     }
