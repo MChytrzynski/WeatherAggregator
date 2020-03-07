@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using WeatherAggregator.Services;
+using WeatherAggregator.ViewModels;
 
 namespace WeatherAggregator
 {
@@ -24,6 +27,9 @@ namespace WeatherAggregator
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
+            services.AddTransient<IForecastCollectionViewModel,ForecastCollectionViewModel>();
+            services.AddTransient<IForecastDownloader,OpenWeatherForecastDownloader>();
+            services.AddSingleton<HttpClient>();
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
