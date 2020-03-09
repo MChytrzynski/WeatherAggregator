@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WeatherAggregator.Data;
 using WeatherAggregator.Data.Models;
@@ -19,12 +15,12 @@ namespace WeatherAggregator.ViewModels
     {
         #region Private properties
         private readonly IEnumerable<IForecastDownloader> forecastDownloaders;
-        private List<ForecastModel> forecastsCollection;
+        private ObservableCollection<IForecastViewModel> forecastsCollection;
         #endregion
         #region Constructor
         public ForecastCollectionViewModel(IEnumerable<IForecastDownloader> forecastDownloaders)
         {
-            StartForecastDownloads = new RelayCommand(() => GetForecasts());
+            StartForecastDownloads = new RelayCommand(() => InitializeForecastsDownloads());
             this.forecastDownloaders = forecastDownloaders;
         }
         #endregion
@@ -34,9 +30,9 @@ namespace WeatherAggregator.ViewModels
         /// </summary>
         public ICommand StartForecastDownloads { get; set; }
         /// <summary>
-        /// List containing all forecasts
+        /// List containing all forecasts viewmodels
         /// </summary>
-        public List<ForecastModel> ForecastsCollection
+        public ObservableCollection<IForecastViewModel> ForecastsCollection
         {
             get
             {
@@ -56,15 +52,15 @@ namespace WeatherAggregator.ViewModels
         #endregion
         #region Private methods
         /// <summary>
-        /// Calls GetForecast on each forecast downloader
+        /// Create forecastviewmodel for each forecast downloader and inject that forecast downloader through constructor
         /// </summary>
-        private async void GetForecasts()
+        private void InitializeForecastsDownloads()
         {
-            forecastsCollection = new List<ForecastModel>();
+            ForecastsCollection = new ObservableCollection<IForecastViewModel>();
             var coordinates = new Coordinates(Latitude, Longitude);
             foreach (var forecastDownloader in forecastDownloaders)
             {
-                forecastsCollection.Add(await forecastDownloader.GetForecast(coordinates));
+                forecastsCollection.Add(new ForecastViewModel(forecastDownloader,coordinates));
             }
         }
         #endregion

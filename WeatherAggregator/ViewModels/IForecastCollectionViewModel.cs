@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WeatherAggregator.Data.Models;
 
@@ -9,7 +10,7 @@ namespace WeatherAggregator.ViewModels
         /// <summary>
         /// List containing all forecasts
         /// </summary>
-        public List<ForecastModel> ForecastsCollection { get; set; }
+        public ObservableCollection<IForecastViewModel> ForecastsCollection { get; set; }
         double Latitude { get; set; }
         double Longitude { get; set; }
         /// <summary>
