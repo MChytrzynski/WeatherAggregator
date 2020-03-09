@@ -28,6 +28,7 @@ namespace WeatherAggregator
         {
             services.AddSingleton<MainWindow>();
             services.AddTransient<IForecastCollectionViewModel,ForecastCollectionViewModel>();
+            services.AddTransient<IForecastViewModel, ForecastViewModel>();
             services.AddTransient<IForecastDownloader,OpenWeatherForecastDownloader>();
             services.AddTransient<IForecastDownloader, WeatherStackForecastDownloader>();
             services.AddSingleton<HttpClient>();
