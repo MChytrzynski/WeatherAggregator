@@ -41,17 +41,14 @@ namespace WeatherAggregator.ViewModels
                 {
                     //if forecast changed, invoke propertychanged for each property using its data
                     forecast = value;
-                    InvokePropertyChanged(nameof(WeatherCode));
                     InvokePropertyChanged(nameof(ForecastSource));
                     InvokePropertyChanged(nameof(Temperature));
+                    InvokePropertyChanged(nameof(Description));
+                    InvokePropertyChanged(nameof(Date));
                 }
             }
         }
-        /// <summary>
-        /// Contains weather code describing current weather state
-        /// <see cref="https://openweathermap.org/weather-conditions"/>
-        /// </summary>
-        public string WeatherCode { get { return Forecast?.WeatherCode; } }
+
         /// <summary>
         /// Informs which implementation of <see cref="IForecastDownloader"/> was used to get this forecast
         /// </summary>
@@ -59,7 +56,16 @@ namespace WeatherAggregator.ViewModels
         /// <summary>
         /// Informs about temperature in this forecast
         /// </summary>
-        public double? Temperature { get { return Forecast?.Temperature; } }
+        public int? Temperature { get { return Convert.ToInt32(Forecast?.Temperature); } }
+        /// <summary>
+        /// Date that is covered by this forecast
+        /// </summary>
+        public string Date { get { return Forecast?.Date.ToString("dd-MM-yyyy"); } }
+        /// <summary>
+        /// Weather descriptor represents weather conditions at requested location
+        /// <see cref="https://openweathermap.org/weather-conditions"/>
+        /// </summary>
+        public string Description { get { return Forecast?.WeatherDescriptor; } }
         #endregion
         #region Private methods
         /// <summary>

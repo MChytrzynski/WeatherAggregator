@@ -11,7 +11,7 @@ namespace WeatherAggregator.Services
     /// Class that handles downloading forecasts from OpenWeather API
     /// </summary>
     class OpenWeatherForecastDownloader : IForecastDownloader
-    {   
+    {
         #region Private Fields
         private readonly HttpClient httpClient;
         private string connectionString;
@@ -58,13 +58,13 @@ namespace WeatherAggregator.Services
                 //deserialize response
                 var deserializedResponse = OpenWeatherDeserializer.FromJson(responseString);
                 //create and return forecast model with forecast data
-                return new ForecastModel() { Date=DateTime.Today, Location=coordinates, SourceType=ForecastSourceType.OpenWeather, Temperature=deserializedResponse.Main.Temp, WeatherCode=deserializedResponse.Weather[0].Id.ToString() };
+                return new ForecastModel() { Date = DateTime.Today, Location = coordinates, SourceType = ForecastSourceType.OpenWeather, Temperature = deserializedResponse.Main.Temp, WeatherDescriptor = deserializedResponse.Weather[0].Main };
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Downloading forecast from OpenWeatherMaps.com failed, an exception has occured: {e.Message }");
+                return new ForecastModel() { WeatherDescriptor = "Weather download failed", Date = DateTime.Today, SourceType = ForecastSourceType.OpenWeather };
             }
-            return null;
         }
         /// <summary>
         /// Downloads forecast for a given date at given coordinates

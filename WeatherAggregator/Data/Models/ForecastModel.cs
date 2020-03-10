@@ -20,10 +20,10 @@ namespace WeatherAggregator.Data.Models
         /// </summary>
         public double Temperature { get; set; }
         /// <summary>
-        /// Weather code describing weather conditions at requested location
+        /// Weather descriptor represents weather conditions at requested location
         /// <see cref="https://openweathermap.org/weather-conditions"/>
         /// </summary>
-        public string WeatherCode { get; set; }
+        public string WeatherDescriptor { get; set; }
         /// <summary>
         /// Forecast provider used to get this forecast
         /// </summary>

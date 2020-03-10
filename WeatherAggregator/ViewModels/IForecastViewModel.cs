@@ -14,11 +14,11 @@ namespace WeatherAggregator.ViewModels
         /// <summary>
         /// Informs about temperature in this forecast
         /// </summary>
-        double? Temperature { get; }
+        int? Temperature { get; }
         /// <summary>
         /// Contains weather code describing current weather state
         /// <see cref="https://openweathermap.org/weather-conditions"/>
         /// </summary>
-        string WeatherCode { get; }
+        string Descriptor { get; }
     }
 }

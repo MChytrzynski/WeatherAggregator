@@ -67,13 +67,13 @@ namespace WeatherAggregator.Services
                 //response JArray to target type
                 var deserializedResponse= response.ToObject<WeatherStackDeserializer>();
                 //create and return forecast model with forecast data
-                return new ForecastModel() { Date=DateTime.Today, Location=coordinates, SourceType=ForecastSourceType.WeatherStack, Temperature=deserializedResponse.Current.Temperature, WeatherCode=deserializedResponse.Current.WeatherCode.ToString() };
+                return new ForecastModel() { Date=DateTime.Today, Location=coordinates, SourceType=ForecastSourceType.WeatherStack, Temperature=deserializedResponse.Current.Temperature, WeatherDescriptor=deserializedResponse.Current.WeatherDescriptions[0]};
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Downloading forecast from WeatherStack failed, an exception has occured: {e.Message }");
+                return new ForecastModel() { WeatherDescriptor = "Weather download failed", Date = DateTime.Today, SourceType = ForecastSourceType.WeatherStack };
             }
-            return null;
         }
         #endregion
         /// <summary>
