@@ -35,7 +35,7 @@ namespace WeatherAggregator.Services
         /// <returns></returns>
         private string ComposeCurrentWeatherRequestString(Coordinates coordinates)
         {
-            return $"{connectionString}lat={coordinates.Latitude}&lon={coordinates.Longitude}&appid={apiKey}";
+            return $"{connectionString}lat={coordinates.Latitude}&lon={coordinates.Longitude}&appid={apiKey}&units=metric";
         }
         #endregion
         #region Public Methods
