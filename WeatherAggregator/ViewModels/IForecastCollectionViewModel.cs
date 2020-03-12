@@ -11,8 +11,7 @@ namespace WeatherAggregator.ViewModels
         /// List containing all forecasts
         /// </summary>
         public ObservableCollection<IForecastViewModel> ForecastsCollection { get; set; }
-        double Latitude { get; set; }
-        double Longitude { get; set; }
+        public string LocationQuery { get; set; }
         /// <summary>
         /// Calls method that downloads forecast from each provider
         /// </summary>

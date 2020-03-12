@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WeatherAggregator.Data;
 using WeatherAggregator.Data.Models;
@@ -15,13 +17,15 @@ namespace WeatherAggregator.ViewModels
     {
         #region Private properties
         private readonly IEnumerable<IForecastDownloader> forecastDownloaders;
+        private readonly ILocationResolver locationResolver;
         private ObservableCollection<IForecastViewModel> forecastsCollection;
         #endregion
         #region Constructor
-        public ForecastCollectionViewModel(IEnumerable<IForecastDownloader> forecastDownloaders)
+        public ForecastCollectionViewModel(IEnumerable<IForecastDownloader> forecastDownloaders,ILocationResolver locationResolver)
         {
             StartForecastDownloads = new RelayCommand(() => InitializeForecastsDownloads());
             this.forecastDownloaders = forecastDownloaders;
+            this.locationResolver = locationResolver;
         }
         #endregion
         #region Public Properties
@@ -47,17 +51,22 @@ namespace WeatherAggregator.ViewModels
                 }
             }
         }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        public string LocationQuery { get; set; }
         #endregion
         #region Private methods
         /// <summary>
-        /// Create forecastviewmodel for each forecast downloader and inject that forecast downloader through constructor
+        /// Try to resolve location query, if it was successful, create forecastviewmodel for each forecast downloader and inject that forecast downloader through constructor
         /// </summary>
-        private void InitializeForecastsDownloads()
+        private async void InitializeForecastsDownloads()
         {
+            //resolve location query into coordinates
+            var coordinates = await locationResolver.ResolveLocation(LocationQuery);
+            //check if resolving was successful
+            if (coordinates.Latitude is null || coordinates.Latitude is null)
+                return;
+            //clean forecastcollection
             ForecastsCollection = new ObservableCollection<IForecastViewModel>();
-            var coordinates = new Coordinates(Latitude, Longitude);
+            //create forecastviewmodel for each forecast downloader and inject that downloader 
             foreach (var forecastDownloader in forecastDownloaders)
             {
                 forecastsCollection.Add(new ForecastViewModel(forecastDownloader,coordinates));
