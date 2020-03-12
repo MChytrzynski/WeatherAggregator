@@ -9,12 +9,12 @@ namespace WeatherAggregator.Data
     /// </summary>
     public struct Coordinates
     {
-        public Coordinates(double Latitude,double Longitude)
+        public Coordinates(string Latitude,string Longitude)
         {
             this.Latitude = Latitude;
             this.Longitude = Longitude;
         }
-        public double Latitude { get; private set; }
-        public double Longitude { get; private set; }
+        public string Latitude { get; private set; }
+        public string Longitude { get; private set; }
     }
 }
