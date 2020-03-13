@@ -20,13 +20,23 @@ namespace WeatherAggregator
         /// </summary>
         public const string WeatherStackApiKey = "YOUR_API_KEY";
         /// <summary>
+        /// Api key used to connect to LocationIQ API
+        /// <see cref="https://locationiq.com/register"/>
+        /// </summary>
+        public const string LocationIQApiKey = "YOUR_API_KEY";
+        /// <summary>
         /// OpenWeather connection string used to get current weather
         /// </summary>
-        public const string OpenWeatherCurrentWeatherConnectionString = "http://api.openweathermap.org/data/2.5/weather";
+        public const string OpenWeatherCurrentWeatherConnectionString = "http://api.openweathermap.org/data/2.5/weather?";
         /// <summary>
         /// WeatherStack connection string used to get current weather
         /// </summary>
         public const string WeatherStackCurrentWeatherConnectionString = "http://api.weatherstack.com/current";
+        /// <summary>
+        /// LocationIQ connection string used to resolve locations
+        /// </summary>
+        public const string LocationIQConnectionString = "https://eu1.locationiq.com/v1/search.php";
+
 
     }
 }
