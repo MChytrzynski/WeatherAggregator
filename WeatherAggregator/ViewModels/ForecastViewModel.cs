@@ -43,7 +43,7 @@ namespace WeatherAggregator.ViewModels
                     forecast = value;
                     InvokePropertyChanged(nameof(ForecastSource));
                     InvokePropertyChanged(nameof(Temperature));
-                    InvokePropertyChanged(nameof(Description));
+                    InvokePropertyChanged(nameof(Descriptor));
                     InvokePropertyChanged(nameof(Date));
                 }
             }
@@ -65,7 +65,7 @@ namespace WeatherAggregator.ViewModels
         /// Weather descriptor represents weather conditions at requested location
         /// <see cref="https://openweathermap.org/weather-conditions"/>
         /// </summary>
-        public string Description { get { return Forecast?.WeatherDescriptor; } }
+        public string Descriptor { get { return Forecast?.WeatherDescriptor; } }
         #endregion
         #region Private methods
         /// <summary>
