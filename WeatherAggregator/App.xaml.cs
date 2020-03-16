@@ -31,6 +31,7 @@ namespace WeatherAggregator
             services.AddTransient<IForecastViewModel, ForecastViewModel>();
             services.AddTransient<IForecastDownloader,OpenWeatherForecastDownloader>();
             services.AddTransient<IForecastDownloader, WeatherStackForecastDownloader>();
+            services.AddTransient<IForecastDownloader, DarkSkyForeacastDownloader>();
             services.AddTransient<ILocationResolver, LocationResolver>();
             services.AddSingleton<HttpClient>();
         }

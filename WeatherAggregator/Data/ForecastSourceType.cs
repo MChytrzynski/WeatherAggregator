@@ -6,6 +6,6 @@ namespace WeatherAggregator.Data
 {
     public enum ForecastSourceType
     {
-        OpenWeather,WeatherStack
+        OpenWeather,WeatherStack,DarkSky
     }
 }
