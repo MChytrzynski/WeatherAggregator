@@ -24,7 +24,7 @@ namespace WeatherAggregator
         public Uri Licence { get; set; }
 
         [JsonProperty("osm_type", NullValueHandling = NullValueHandling.Ignore)]
-        public OsmType? OsmType { get; set; }
+        public string? OsmType { get; set; }
 
         [JsonProperty("osm_id", NullValueHandling = NullValueHandling.Ignore)]
         public string OsmId { get; set; }
@@ -42,7 +42,7 @@ namespace WeatherAggregator
         public string DisplayName { get; set; }
 
         [JsonProperty("class", NullValueHandling = NullValueHandling.Ignore)]
-        public Class? Class { get; set; }
+        public string? Class { get; set; }
 
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; set; }
@@ -54,8 +54,6 @@ namespace WeatherAggregator
         public Uri Icon { get; set; }
     }
 
-    public enum Class { Boundary, Place };
 
-    public enum OsmType { Node, Relation };
 
 }
